@@ -1,0 +1,45 @@
+body{
+    background-color: #0B132B;
+    color: aliceblue;
+    font-family: 'Winky Rough', cursive;
+}
+
+body *{
+    padding: 5px;
+}
+
+nav ul li{
+    margin: 10px;;
+    padding: 10px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: white;
+}
+
+nav ul li:hover{
+    color: #3A506B;
+    background-color: #6e7384;
+}
+
+.bg-gray{
+    background-color: gray;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.container{
+    display: grid;
+    grid-template-areas: "menu content";
+}
+
+.container > nav{
+    grid-area: menu;
+    border-right: white 1px solid;
+}
+.container > main{
+    grid-area: content;
+}
