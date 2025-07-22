@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora JS</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <center>
+  <table>
+    <tbody>
+      <tr>
+        <td colspan="4" align="right" style="border: 1px solid black; padding: 5px;">
+          <span id="calc-output">0</span>
+        </td>
+      </tr>
+
+    <tr>
+      <td>
+        <input type="button" value="1" id="button-1">
+      </td>
+      <td>
+        <input type="button" value="2" id="button-2">
+      </td>
+      <td>
+        <input type="button" value="3" id="button-3">
+      </td>
+      <td>
+        <input type="button" value="C" id="button-C">
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <input type="button" value="4" id="button-4">
+      </td>
+      <td>
+        <input type="button" value="5" id="button-5">
+      </td>
+      <td>
+        <input type="button" value="6" id="button-6">
+      </td>
+      <td>
+        <input type="button" value="+" id="button-+">
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <input type="button" value="7" id="button-7">
+      </td>
+      <td>
+        <input type="button" value="8" id="button-8">
+      </td>
+      <td>
+        <input type="button" value="9" id="button-9">
+      </td>
+      <td>
+        <input type="button" value="-" id="button--">
+      </td> 
+    </tr>
+
+    <tr>
+      <td>
+        <input type="button" value="." id="button-.">
+      </td>
+      <td>
+        <input type="button" value="0" id="button-0">
+      </td>
+      <td>
+        <input type="button" value="/" id="button-/">
+      </td>
+      <td>
+        <input type="button" value="=" id="button-=">
+      </td> 
+    </tr>       
+    
+  </tbody></table>
+  </center>
+<body>
+<script>
+  let output = document.getElementById('calc-output');
+  let currentInput = '';
+  
+  function updateOutput() {
+    output.textContent = currentInput || '0';
+  }
+
+  function handleButtonClick(value) {
+    if (value === 'C') {
+      currentInput = '';
+    } else if (value === '=') {
+      try {
+        currentInput = safeEval(currentInput);
+      } catch (e) {
+        currentInput = 'Error';
+      }
+    } else {
+      currentInput += value;
+    }
+    updateOutput();
+  }
+
+  document.querySelectorAll('input[type="button"]').forEach(button => {
+    button.addEventListener('click', () => handleButtonClick(button.value));
+  });
+
+    function isSafeMathExpression(expr) {
+        return /^[0-9+\-*/(). ]+$/.test(expr); // apenas números, operadores e parênteses
+    }
+
+    function safeEval(expr) {
+        if (isSafeMathExpression(expr)) {
+            return Function('"use strict"; return (' + expr + ')')();
+        } else {
+            throw new Error("Expressão inválida");
+        }
+    }
+
+  updateOutput();
+
+</script>
+</body>
+</html>
